@@ -1,7 +1,8 @@
-package ru.potemkin.dating
+package ru.potemkin.dating.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import ru.potemkin.dating.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
