@@ -1,4 +1,4 @@
-package ru.potemkin.dating.presentation
+package ru.potemkin.dating.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 
