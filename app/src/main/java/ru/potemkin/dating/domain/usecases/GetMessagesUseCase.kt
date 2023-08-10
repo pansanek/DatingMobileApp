@@ -1,4 +1,12 @@
 package ru.potemkin.dating.domain.usecases
 
-class GetMessagesUseCase {
+import ru.potemkin.dating.domain.repository.DatingRepository
+
+class GetMessagesUseCase(
+    private val repository: DatingRepository
+) {
+    suspend operator fun invoke(
+        currentUserId: String,
+        otherUserId: String
+    ) = repository.getMessages(currentUserId,otherUserId)
 }
