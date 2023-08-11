@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="icons_style" parent="">
+        <item name="tint">@color/black</item>
+    </style>
+
+    <style name="custom_bottom_nav" parent="Widget.MaterialComponents.CardView">
+        <item name="android:background">@color/white</item>
+    </style>
+</resources>
