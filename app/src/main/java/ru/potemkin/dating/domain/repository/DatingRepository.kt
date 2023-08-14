@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import ru.potemkin.dating.domain.entities.*
 
 interface DatingRepository {
+    fun addUser(user: User)
+
     suspend fun likeUser(
         currentUserId: String,
         userIdToLike: String
@@ -14,10 +16,12 @@ interface DatingRepository {
         userIdToReject: String
     ): LiveData<Boolean>
 
-    suspend fun getUsers(
-        currentUserId: String,
-        filters: UserFilters
-    ): LiveData<List<User>>
+    fun getUser(
+        currentUserId: Int,
+        //filters: UserFilters
+    ): User
+
+    fun getUserList(): LiveData<List<User>>
 
     suspend fun getMatches(
         currentUserId: String

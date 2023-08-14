@@ -1,12 +1,29 @@
 package ru.potemkin.dating.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import ru.potemkin.dating.domain.entities.*
 import ru.potemkin.dating.domain.repository.DatingRepository
+import kotlin.random.Random
 
-class DatingRepositoryImpl(
+object DatingRepositoryImpl: DatingRepository {
+    private val userListLiveData = MutableLiveData<List<User>>()
+    private val userList= mutableListOf<User>()
 
-): DatingRepository {
+    private var autoIncrementId =0
+    init{
+        for(i in 0 until 10){
+            val item = User("Name $i",i, Gender.FEMALE)
+            addUser(item)
+        }
+    }
+    override fun addUser(user:User) {
+        if(user.id == User.UNDEFINED_ID) {
+            user.id = autoIncrementId++
+        }
+        userList.add(user)
+        updateList()
+    }
     override suspend fun likeUser(
         currentUserId: String,
         userIdToLike: String
@@ -21,11 +38,13 @@ class DatingRepositoryImpl(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUsers(
-        currentUserId: String,
-        filters: UserFilters
-    ): LiveData<List<User>> {
-        TODO("Not yet implemented")
+    override fun getUser(currentUserId: Int): User {
+        return userList.find {
+            it.id == currentUserId
+        } ?: throw java.lang.RuntimeException("Element with id $currentUserId not found")
+    }
+    override fun getUserList(): LiveData<List<User>> {
+        return userListLiveData
     }
 
     override suspend fun getMatches(currentUserId: String): LiveData<List<User>> {
@@ -75,4 +94,7 @@ class DatingRepositoryImpl(
         TODO("Not yet implemented")
     }
 
+    private fun updateList(){
+        userListLiveData.value = userList.toList()
+    }
 }
