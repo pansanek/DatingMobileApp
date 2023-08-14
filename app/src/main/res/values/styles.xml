@@ -8,4 +8,17 @@
     <style name="custom_bottom_nav" parent="Widget.MaterialComponents.CardView">
         <item name="android:background">@color/white</item>
     </style>
+
+    <style name="custom_card_view_style" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/custom_card_view</item>
+        <item name="android:backgroundTint">@color/teal_200</item>
+    </style>
+
+    <style name="custom_card_view" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+    </style>
 </resources>

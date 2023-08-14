@@ -5,6 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCoinPriceList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_match"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
@@ -16,43 +25,42 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <ImageView
-                android:id="@+id/ic_news"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/icons_style"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+            style="@style/custom_card_view_style">
 
-            <ImageView
-                android:id="@+id/ic_map"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/icons_style"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/ic_news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/icons_style"
+                    app:srcCompat="@drawable/chat" />
+
+                <ImageView
+                    android:id="@+id/ic_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/icons_style"
+                    app:srcCompat="@drawable/heart" />
 
 
-            <ImageView
-                android:id="@+id/ic_chat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                style="@style/icons_style"
-                app:srcCompat="@drawable/ic_launcher_foreground" />
+                <ImageView
+                    android:id="@+id/ic_chat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/icons_style"
+                    app:srcCompat="@drawable/user" />
 
-        </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCoinPriceList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/item_match"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
