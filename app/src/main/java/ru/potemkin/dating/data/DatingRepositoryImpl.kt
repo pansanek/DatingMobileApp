@@ -2,6 +2,7 @@ package ru.potemkin.dating.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import ru.potemkin.dating.R
 import ru.potemkin.dating.domain.entities.*
 import ru.potemkin.dating.domain.repository.DatingRepository
 import kotlin.random.Random
@@ -12,10 +13,11 @@ object DatingRepositoryImpl: DatingRepository {
 
     private var autoIncrementId =0
     init{
-        for(i in 0 until 10){
-            val item = User("Name $i",i, Gender.FEMALE)
-            addUser(item)
-        }
+
+        addUser(User("Настя",21, Gender.FEMALE, R.drawable.sample1))
+        addUser(User("Арина",86, Gender.FEMALE, R.drawable.sample2))
+        addUser(User("Лиза",21, Gender.FEMALE, R.drawable.sample3))
+        addUser(User("Лера",30, Gender.FEMALE, R.drawable.sample4))
     }
     override fun addUser(user:User) {
         if(user.id == User.UNDEFINED_ID) {

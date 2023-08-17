@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Dating"
         tools:replace="android:icon,android:theme"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:largeHeap="true"
+        android:hardwareAccelerated="false">
         <activity
             android:name=".presentation.SwipeActivity"
             android:exported="true">

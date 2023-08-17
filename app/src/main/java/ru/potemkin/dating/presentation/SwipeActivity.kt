@@ -3,26 +3,28 @@ package ru.potemkin.dating.presentation
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
+import android.view.View
+import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
 import com.lorentzos.flingswipe.SwipeFlingAdapterView
-import ru.potemkin.dating.databinding.ActivitySwipeBinding
-import ru.potemkin.dating.presentation.viewmodels.SwipeViewModel
+import com.yuyakaido.android.cardstackview.*
 import ru.potemkin.dating.R
-
+import ru.potemkin.dating.databinding.ActivitySwipeBinding
+import ru.potemkin.dating.presentation.adapters.SwipeAdapter
+import ru.potemkin.dating.presentation.viewmodels.SwipeViewModel
 
 
 class SwipeActivity : AppCompatActivity() {
 
-    private var arrayAdapter: ArrayAdapter<String>? = null
     var flingAdapterView: SwipeFlingAdapterView? = null
     private lateinit var swipeViewModel: SwipeViewModel
-    private var data = ArrayList<String>()
 
-    private lateinit var viewModel: SwipeViewModel
     private lateinit var binding: ActivitySwipeBinding
+    private lateinit var swipeAdapter: SwipeAdapter
 
+    private lateinit var manager: CardStackLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,40 +34,52 @@ class SwipeActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        swipeViewModel = ViewModelProvider(this)[SwipeViewModel::class.java]
-
-        flingAdapterView = binding.swipe
-        swipeViewModel.userList.observe(this) {
-            for(i in 0..it.size-1){
-                data.add(it[i].toString())
-                Log.d("MainActivityTest", "List:" + data[i])
+        manager = CardStackLayoutManager(this,object: CardStackListener{
+            override fun onCardDragging(direction: Direction?, ratio: Float) {
+                Log.d("Swipe", "onCardDragging: d=" + direction?.name + " ratio=" + ratio);
             }
-            arrayAdapter =
-                ArrayAdapter<String>(this, R.layout.item_user_layout, R.id.textView3, data)
-            binding.swipe.adapter = arrayAdapter
-            binding.swipe.setFlingListener(object : SwipeFlingAdapterView.onFlingListener {
-                override fun removeFirstObjectInAdapter() {
-                    data.removeAt(0)
-                    arrayAdapter?.notifyDataSetChanged()
-                }
 
-                override fun onLeftCardExit(p0: Any?) {
-                    Log.d("MainActivityTest","left")
-                }
+            override fun onCardSwiped(direction: Direction?) {
+                Log.d("Swipe", "onCardSwiped: p=" + manager?.topPosition + " d=" + direction);
+            }
 
-                override fun onRightCardExit(p0: Any?) {
-                    Log.d("MainActivityTest","right")
-                }
+            override fun onCardRewound() {
+                Log.d("Swipe", "onCardRewound: " + manager?.topPosition);
+            }
 
-                override fun onAdapterAboutToEmpty(p0: Int) {
-                    Log.d("MainActivityTest","AdapterAboutToEmpty")
-                }
+            override fun onCardCanceled() {
+                Log.d("Swipe", "onCardCancelled: " + manager?.topPosition);
+            }
 
-                override fun onScroll(p0: Float) {
+            override fun onCardAppeared(view: View?, position: Int) {
+                Log.d("Swipe", "onCardAppeared: " + position);
+            }
 
-                }
+            override fun onCardDisappeared(view: View?, position: Int) {
+                Log.d("Swipe", "onCardDisappeared: " + position);
+            }
 
-            })
+        })
+        manager.setStackFrom(StackFrom.None)
+        manager.setVisibleCount(3)
+        manager.setTranslationInterval(8.0f)
+        manager.setScaleInterval(0.95f)
+        manager.setSwipeThreshold(0.3f)
+        manager.setMaxDegree(20.0f)
+        manager.setDirections(Direction.FREEDOM)
+        manager.setCanScrollHorizontal(true)
+        manager.setSwipeableMethod(SwipeableMethod.Manual)
+        manager.setOverlayInterpolator(LinearInterpolator())
+
+
+        swipeViewModel = ViewModelProvider(this)[SwipeViewModel::class.java]
+        swipeViewModel.userList.observe(this) {
+            with(binding.swipe) {
+                val adapter = SwipeAdapter(it)
+                setLayoutManager(manager)
+                setAdapter(adapter)
+                setItemAnimator(DefaultItemAnimator())
+            }
         }
     }
 }

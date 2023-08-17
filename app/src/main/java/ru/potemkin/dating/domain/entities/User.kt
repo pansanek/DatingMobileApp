@@ -5,14 +5,12 @@ data class User(
     val age: Int,
     val gender: Gender,
 //    val bio: String,
-//    val photos: List<String>,
+    val image: Int,
 //    val location: Location,
 //    val interests: List<Interest>,
     var id: Int = UNDEFINED_ID
-)
-
-{
-    companion object{
+) {
+    companion object {
         const val UNDEFINED_ID = -1
     }
 }
