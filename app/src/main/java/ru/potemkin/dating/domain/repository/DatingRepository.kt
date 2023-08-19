@@ -21,6 +21,10 @@ interface DatingRepository {
         //filters: UserFilters
     ): User
 
+    fun deleteMatch(
+        user: User
+    )
+
     fun getUserList(): LiveData<List<User>>
 
     suspend fun getMatches(

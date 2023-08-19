@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+
+        <variable
+            name="user"
+            type="ru.potemkin.dating.domain.entities.User"
+            />
+    </data>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -16,8 +24,8 @@
         <ImageView
             android:layout_height="80dp"
             android:layout_width="match_parent"
-            android:id="@+id/imageView1"
-            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/userPicture"
+            android:src="@drawable/sample1"
             android:scaleType="centerCrop"/>
     </androidx.cardview.widget.CardView>
 
@@ -25,9 +33,10 @@
         android:id="@+id/textViewUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="John Doe"
+        android:text="@{user.name}"
         android:textStyle="bold"
         android:textSize="36sp"
         android:layout_marginStart="8dp"/>
 
 </LinearLayout>
+</layout>

@@ -34,7 +34,40 @@ class SwipeActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        manager = CardStackLayoutManager(this,object: CardStackListener{
+        createManager()
+        setupManager()
+
+        swipeViewModel = ViewModelProvider(this)[SwipeViewModel::class.java]
+        swipeViewModel.userList.observe(this) {
+            with(binding.swipe) {
+                val adapter = SwipeAdapter(it)
+                setLayoutManager(manager)
+                setAdapter(adapter)
+                setItemAnimator(DefaultItemAnimator())
+            }
+        }
+
+        binding.icMatches.setOnClickListener {
+            val intent = MatchesActivity.newIntentAddItem(this)
+            startActivity(intent)
+        }
+    }
+
+    private fun setupManager() {
+        manager.setStackFrom(StackFrom.None)
+        manager.setVisibleCount(3)
+        manager.setTranslationInterval(8.0f)
+        manager.setScaleInterval(0.95f)
+        manager.setSwipeThreshold(0.3f)
+        manager.setMaxDegree(20.0f)
+        manager.setDirections(Direction.FREEDOM)
+        manager.setCanScrollHorizontal(true)
+        manager.setSwipeableMethod(SwipeableMethod.Manual)
+        manager.setOverlayInterpolator(LinearInterpolator())
+    }
+
+    private fun createManager() {
+        manager = CardStackLayoutManager(this, object : CardStackListener {
             override fun onCardDragging(direction: Direction?, ratio: Float) {
                 Log.d("Swipe", "onCardDragging: d=" + direction?.name + " ratio=" + ratio);
             }
@@ -60,26 +93,5 @@ class SwipeActivity : AppCompatActivity() {
             }
 
         })
-        manager.setStackFrom(StackFrom.None)
-        manager.setVisibleCount(3)
-        manager.setTranslationInterval(8.0f)
-        manager.setScaleInterval(0.95f)
-        manager.setSwipeThreshold(0.3f)
-        manager.setMaxDegree(20.0f)
-        manager.setDirections(Direction.FREEDOM)
-        manager.setCanScrollHorizontal(true)
-        manager.setSwipeableMethod(SwipeableMethod.Manual)
-        manager.setOverlayInterpolator(LinearInterpolator())
-
-
-        swipeViewModel = ViewModelProvider(this)[SwipeViewModel::class.java]
-        swipeViewModel.userList.observe(this) {
-            with(binding.swipe) {
-                val adapter = SwipeAdapter(it)
-                setLayoutManager(manager)
-                setAdapter(adapter)
-                setItemAnimator(DefaultItemAnimator())
-            }
-        }
     }
 }

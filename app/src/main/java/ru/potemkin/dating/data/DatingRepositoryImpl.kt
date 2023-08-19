@@ -95,7 +95,10 @@ object DatingRepositoryImpl: DatingRepository {
     ): LiveData<List<User>> {
         TODO("Not yet implemented")
     }
-
+    override fun deleteMatch(user: User) {
+        userList.remove(user)
+        updateList()
+    }
     private fun updateList(){
         userListLiveData.value = userList.toList()
     }
