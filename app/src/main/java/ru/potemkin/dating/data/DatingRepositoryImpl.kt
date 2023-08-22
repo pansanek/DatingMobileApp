@@ -13,11 +13,32 @@ object DatingRepositoryImpl: DatingRepository {
 
     private var autoIncrementId =0
     init{
+        val interestsNastya = listOf(
+            Interest("Путешествия"),
+            Interest("Фотография"),
+            Interest("Чтение")
+        )
+        val interestsArina = listOf(
+            Interest("Искусство"),
+            Interest("Музыка"),
+            Interest("Садоводство")
+        )
+        val interestsLiza = listOf(
+            Interest("Плавание"),
+            Interest("Танцы"),
+            Interest("Шопинг")
+        )
+        val interestsLera = listOf(
+            Interest("Фитнес"),
+            Interest("Кулинария"),
+            Interest("Горные лыжи")
+        )
 
-        addUser(User("Настя",21, Gender.FEMALE, R.drawable.sample1))
-        addUser(User("Арина",86, Gender.FEMALE, R.drawable.sample2))
-        addUser(User("Лиза",21, Gender.FEMALE, R.drawable.sample3))
-        addUser(User("Лера",30, Gender.FEMALE, R.drawable.sample4))
+        addUser(User("Настя", 21, Gender.FEMALE, "Привет! Люблю путешествовать и фотографировать. Также увлекаюсь чтением.", R.drawable.sample1, "Москва", interestsNastya))
+        addUser(User("Арина", 86, Gender.FEMALE, "Привет! Я художник и музыкант. Также люблю заниматься садоводством.", R.drawable.sample2, "Санкт-Петербург", interestsArina))
+        addUser(User("Лиза", 21, Gender.FEMALE, "Привет! Обожаю плавать и танцевать. Также у меня слабость к шопингу.", R.drawable.sample3, "Москва", interestsLiza))
+        addUser(User("Лера", 30, Gender.FEMALE, "Привет! Я фитнес-инструктор и люблю готовить. В зимнее время предпочитаю горные лыжи.", R.drawable.sample4, "Минск", interestsLera))
+
     }
     override fun addUser(user:User) {
         if(user.id == User.UNDEFINED_ID) {

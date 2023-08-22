@@ -4,10 +4,10 @@ data class User(
     val name: String,
     val age: Int,
     val gender: Gender,
-//    val bio: String,
+    val bio: String,
     val image: Int,
-//    val location: Location,
-//    val interests: List<Interest>,
+    val location: String,
+    val interests: List<Interest>,
     var id: Int = UNDEFINED_ID
 ) {
     companion object {

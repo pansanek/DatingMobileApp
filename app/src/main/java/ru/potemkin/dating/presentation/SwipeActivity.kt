@@ -12,6 +12,7 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView
 import com.yuyakaido.android.cardstackview.*
 import ru.potemkin.dating.R
 import ru.potemkin.dating.databinding.ActivitySwipeBinding
+import ru.potemkin.dating.presentation.adapters.MatchesAdapter
 import ru.potemkin.dating.presentation.adapters.SwipeAdapter
 import ru.potemkin.dating.presentation.viewmodels.SwipeViewModel
 
@@ -37,12 +38,14 @@ class SwipeActivity : AppCompatActivity() {
         createManager()
         setupManager()
 
+        swipeAdapter = SwipeAdapter()
         swipeViewModel = ViewModelProvider(this)[SwipeViewModel::class.java]
         swipeViewModel.userList.observe(this) {
             with(binding.swipe) {
-                val adapter = SwipeAdapter(it)
+                Log.d("SWIPE", it.toString())
+                swipeAdapter.submitList(it)
                 setLayoutManager(manager)
-                setAdapter(adapter)
+                setAdapter(swipeAdapter)
                 setItemAnimator(DefaultItemAnimator())
             }
         }
@@ -94,4 +97,5 @@ class SwipeActivity : AppCompatActivity() {
 
         })
     }
+
 }

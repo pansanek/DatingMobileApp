@@ -13,23 +13,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/teal_200"
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="48dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
 
-        <ImageView
-            android:id="@+id/item_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="48dp"
-            android:scaleType="centerCrop" />
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="bottom"
-            android:background="@drawable/gradient_shape"
             android:orientation="vertical"
             android:padding="16dp">
 
@@ -37,20 +29,39 @@
                 android:id="@+id/name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="26sp"
                 android:text="@{user.name}"
                 tools:text="@string/app_name"
                 android:textStyle="bold" />
+            <TextView
+                android:id="@+id/location_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:text="@{user.location}"
+                tools:text="@string/app_name"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/age_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:textSize="18sp"
-                android:text="@{user.location}"
-                tools:text="@string/app_name"
+                android:text="@{user.bio}"
+                tools:text="Привет! Люблю путешествовать и фотографировать. Также увлекаюсь чтением."
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/interests_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:text="@{user.interests.toString()}"
+                tools:text="Interests"
                 android:textStyle="bold" />
 
 
