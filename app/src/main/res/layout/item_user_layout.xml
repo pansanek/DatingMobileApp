@@ -20,6 +20,11 @@
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true">
 
+        <me.relex.circleindicator.CircleIndicator3
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:id="@+id/indicator"/>
+
         <ImageView
             android:id="@+id/item_image"
             android:layout_width="match_parent"

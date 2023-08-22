@@ -7,24 +7,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
-import com.lorentzos.flingswipe.SwipeFlingAdapterView
 import com.yuyakaido.android.cardstackview.*
 import ru.potemkin.dating.R
 import ru.potemkin.dating.databinding.ActivitySwipeBinding
 import ru.potemkin.dating.databinding.ItemUserBackLayoutBinding
 import ru.potemkin.dating.databinding.ItemUserLayoutBinding
-import ru.potemkin.dating.presentation.adapters.MatchesAdapter
 import ru.potemkin.dating.presentation.adapters.SwipeAdapter
 import ru.potemkin.dating.presentation.viewmodels.SwipeViewModel
 
 
 class SwipeActivity : AppCompatActivity() {
 
-    var flingAdapterView: SwipeFlingAdapterView? = null
     private lateinit var swipeViewModel: SwipeViewModel
 
     private lateinit var binding: ActivitySwipeBinding
@@ -38,6 +34,8 @@ class SwipeActivity : AppCompatActivity() {
 
     private lateinit var frontCardBinding: ItemUserLayoutBinding
     private lateinit var backCardBinding: ItemUserBackLayoutBinding
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_swipe)
@@ -59,6 +57,7 @@ class SwipeActivity : AppCompatActivity() {
                 setLayoutManager(manager)
                 setAdapter(swipeAdapter)
                 setupClickListener()
+                setupLongClickListener()
                 setItemAnimator(DefaultItemAnimator())
             }
         }
@@ -114,6 +113,11 @@ class SwipeActivity : AppCompatActivity() {
     }
 
     private fun setupClickListener() {
+        Log.d("Swipe", "cliock");
+
+    }
+
+    private fun setupLongClickListener() {
         frontCardBinding = ItemUserLayoutBinding.inflate(layoutInflater)
         backCardBinding = ItemUserBackLayoutBinding.inflate(layoutInflater)
         Log.d("Swipe", "setup");
@@ -123,7 +127,7 @@ class SwipeActivity : AppCompatActivity() {
         back_anim = AnimatorInflater.loadAnimator(
             applicationContext, R.animator.back_animator
         ) as AnimatorSet
-        swipeAdapter.onItemClickListener = {
+        swipeAdapter.onItemLongClickListener = {
             Log.d("Swipe", "CLICK on ${it.name}");
             if (isFront) {
                 swipeAdapter.changeType()
@@ -135,6 +139,5 @@ class SwipeActivity : AppCompatActivity() {
                 isFront = true
             }
         }
-
     }
 }

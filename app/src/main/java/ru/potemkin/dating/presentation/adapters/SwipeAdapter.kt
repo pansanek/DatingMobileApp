@@ -24,6 +24,7 @@ import ru.potemkin.dating.presentation.UserViewHolder
 class SwipeAdapter :
     ListAdapter<User, UserViewHolder>(UserDiffCallback()) {
 
+    var onItemLongClickListener: ((User) -> Unit)? = null
     var onItemClickListener: ((User) -> Unit)? = null
     var type: Boolean = true
 
@@ -50,6 +51,10 @@ class SwipeAdapter :
         val binding = holder.binding
         binding.root.setOnClickListener {
             onItemClickListener?.invoke(user)
+        }
+        binding.root.setOnLongClickListener {
+            onItemLongClickListener?.invoke(user)
+            true
         }
         when (binding) {
             is ItemUserLayoutBinding -> {
