@@ -1,5 +1,6 @@
 package ru.potemkin.dating.presentation.adapters
 
+import android.util.Log
 import ru.potemkin.dating.R
 import android.view.LayoutInflater
 import android.view.View
@@ -20,14 +21,13 @@ import ru.potemkin.dating.presentation.UserDiffCallback
 import ru.potemkin.dating.presentation.UserViewHolder
 
 
-class SwipeAdapter:
-    ListAdapter<User,UserViewHolder>(UserDiffCallback()) {
+class SwipeAdapter :
+    ListAdapter<User, UserViewHolder>(UserDiffCallback()) {
 
     var onItemClickListener: ((User) -> Unit)? = null
     var type: Boolean = true
 
     val transformation: Transformation = RoundedCornersTransformation(CORNER_RADIUS, 0)
-
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -54,7 +54,8 @@ class SwipeAdapter:
         when (binding) {
             is ItemUserLayoutBinding -> {
                 binding.user = user
-                Picasso.get().load(user.image).transform(transformation).fit().centerCrop().into(binding.itemImage);
+                Picasso.get().load(user.image).transform(transformation).fit().centerCrop()
+                    .into(binding.itemImage);
             }
             is ItemUserBackLayoutBinding -> {
                 binding.user = user
@@ -64,14 +65,15 @@ class SwipeAdapter:
 
     override fun getItemViewType(position: Int): Int {
         return if (type) {
-           VIEW_TYPE_FRONT
+            VIEW_TYPE_FRONT
         } else {
             VIEW_TYPE_BACK
         }
     }
 
-    fun changeType(){
+    fun changeType() {
         type = !type
+        Log.d("Swipe", "type = $type");
     }
 
     companion object {
