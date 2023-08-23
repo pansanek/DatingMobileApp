@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
     <data>
 
         <variable
             name="user"
-            type="ru.potemkin.dating.domain.entities.User"
-            />
+            type="ru.potemkin.dating.domain.entities.User" />
     </data>
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,8 +18,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/view2"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_centerHorizontal="true"
             android:elevation="12dp"
             app:cardCornerRadius="40dp">
@@ -25,14 +27,15 @@
             <ImageView
                 android:id="@+id/userPicture"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="48dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/sample4" />
         </androidx.cardview.widget.CardView>
 
+
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="8dp">
 
@@ -41,8 +44,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{user.name}"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Larry" />
 
             <TextView
                 android:id="@+id/textViewMessageContent"
@@ -50,18 +55,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="Hello there!"
-                android:textSize="16sp" />
+                android:textSize="10sp" />
 
-            <TextView
-                android:id="@+id/textViewMessageTimestamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="2 hours ago"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
 
         </LinearLayout>
+
 
     </LinearLayout>
 </layout>
