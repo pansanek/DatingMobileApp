@@ -5,15 +5,14 @@ import androidx.lifecycle.ViewModel
 import ru.potemkin.dating.data.DatingRepositoryImpl
 import ru.potemkin.dating.domain.entities.User
 import ru.potemkin.dating.domain.usecases.*
+import javax.inject.Inject
 
-class SwipeViewModel : ViewModel() {
-
-    private val repository = DatingRepositoryImpl
-
-    private val getUserListUseCase = GetUserListUseCase(repository)
-    private val likeUserUseCase = LikeUserUseCase(repository)
-    private val rejectUserUseCase = RejectUserUseCase(repository)
-    private val deleteMatchUseCase = DeleteMatchUseCase(repository)
+class SwipeViewModel @Inject constructor(
+    private val getUserListUseCase: GetUserListUseCase,
+//    private val likeUserUseCase: LikeUserUseCase,
+//    private val rejectUserUseCase: RejectUserUseCase,
+    private val deleteMatchUseCase: DeleteMatchUseCase
+) : ViewModel() {
 
 
     val userList = getUserListUseCase.invoke()

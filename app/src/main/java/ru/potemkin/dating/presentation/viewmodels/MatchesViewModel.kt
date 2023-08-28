@@ -7,12 +7,13 @@ import ru.potemkin.dating.domain.usecases.DeleteMatchUseCase
 import ru.potemkin.dating.domain.usecases.GetUserListUseCase
 import ru.potemkin.dating.domain.usecases.LikeUserUseCase
 import ru.potemkin.dating.domain.usecases.RejectUserUseCase
+import javax.inject.Inject
 
-class MatchesViewModel : ViewModel() {
-    private val repository = DatingRepositoryImpl
+class MatchesViewModel @Inject constructor(
+    private val getUserListUseCase: GetUserListUseCase,
+    private val deleteMatchUseCase: DeleteMatchUseCase
+) : ViewModel() {
 
-    private val getUserListUseCase = GetUserListUseCase(repository)
-    private val deleteMatchUseCase = DeleteMatchUseCase(repository)
 
 
     val userList = getUserListUseCase.invoke()
