@@ -17,19 +17,29 @@ import ru.potemkin.dating.R
 import ru.potemkin.dating.databinding.ActivityMatchesBinding
 import ru.potemkin.dating.presentation.adapters.MatchesAdapter
 import ru.potemkin.dating.presentation.viewmodels.MatchesViewModel
+import ru.potemkin.dating.presentation.viewmodels.ViewModelFactory
+import javax.inject.Inject
 
 class MatchesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMatchesBinding
     private lateinit var viewModel: MatchesViewModel
     private lateinit var matchesAdapter: MatchesAdapter
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as DatingApplication).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMatchesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView()
         setupSwitch()
-        viewModel = ViewModelProvider(this).get(MatchesViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(MatchesViewModel::class.java)
         viewModel.userList.observe(this) {
             matchesAdapter.submitList(it)
             Log.d("TAG", it.toString())

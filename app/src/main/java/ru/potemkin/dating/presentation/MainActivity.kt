@@ -6,9 +6,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import ru.potemkin.dating.R
 import ru.potemkin.dating.presentation.viewmodels.SwipeViewModel
+import ru.potemkin.dating.presentation.viewmodels.ViewModelFactory
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var swipeViewModel: SwipeViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

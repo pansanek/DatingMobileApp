@@ -9,8 +9,6 @@ import javax.inject.Inject
 
 class SwipeViewModel @Inject constructor(
     private val getUserListUseCase: GetUserListUseCase,
-//    private val likeUserUseCase: LikeUserUseCase,
-//    private val rejectUserUseCase: RejectUserUseCase,
     private val deleteMatchUseCase: DeleteMatchUseCase
 ) : ViewModel() {
 

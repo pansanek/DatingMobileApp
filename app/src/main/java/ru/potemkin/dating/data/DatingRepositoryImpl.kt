@@ -5,14 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import ru.potemkin.dating.R
 import ru.potemkin.dating.domain.entities.*
 import ru.potemkin.dating.domain.repository.DatingRepository
+import javax.inject.Inject
 import kotlin.random.Random
 
-object DatingRepositoryImpl: DatingRepository {
+class DatingRepositoryImpl @Inject constructor() : DatingRepository {
     private val userListLiveData = MutableLiveData<List<User>>()
-    private val userList= mutableListOf<User>()
+    private val userList = mutableListOf<User>()
 
-    private var autoIncrementId =0
-    init{
+    private var autoIncrementId = 0
+
+    init {
         val interestsNastya = listOf(
             Interest("Путешествия"),
             Interest("Фотография"),
@@ -34,19 +36,61 @@ object DatingRepositoryImpl: DatingRepository {
             Interest("Горные лыжи")
         )
 
-        addUser(User("Настя", 21, Gender.FEMALE, "Привет! Люблю путешествовать и фотографировать. Также увлекаюсь чтением.", R.drawable.sample1, "Москва", interestsNastya))
-        addUser(User("Арина", 86, Gender.FEMALE, "Привет! Я художник и музыкант. Также люблю заниматься садоводством.", R.drawable.sample2, "Санкт-Петербург", interestsArina))
-        addUser(User("Лиза", 21, Gender.FEMALE, "Привет! Обожаю плавать и танцевать. Также у меня слабость к шопингу.", R.drawable.sample3, "Москва", interestsLiza))
-        addUser(User("Лера", 30, Gender.FEMALE, "Привет! Я фитнес-инструктор и люблю готовить. В зимнее время предпочитаю горные лыжи.", R.drawable.sample4, "Минск", interestsLera))
+        addUser(
+            User(
+                "Настя",
+                21,
+                Gender.FEMALE,
+                "Привет! Люблю путешествовать и фотографировать. Также увлекаюсь чтением.",
+                R.drawable.sample1,
+                "Москва",
+                interestsNastya
+            )
+        )
+        addUser(
+            User(
+                "Арина",
+                86,
+                Gender.FEMALE,
+                "Привет! Я художник и музыкант. Также люблю заниматься садоводством.",
+                R.drawable.sample2,
+                "Санкт-Петербург",
+                interestsArina
+            )
+        )
+        addUser(
+            User(
+                "Лиза",
+                21,
+                Gender.FEMALE,
+                "Привет! Обожаю плавать и танцевать. Также у меня слабость к шопингу.",
+                R.drawable.sample3,
+                "Москва",
+                interestsLiza
+            )
+        )
+        addUser(
+            User(
+                "Лера",
+                30,
+                Gender.FEMALE,
+                "Привет! Я фитнес-инструктор и люблю готовить. В зимнее время предпочитаю горные лыжи.",
+                R.drawable.sample4,
+                "Минск",
+                interestsLera
+            )
+        )
 
     }
-    override fun addUser(user:User) {
-        if(user.id == User.UNDEFINED_ID) {
+
+    override fun addUser(user: User) {
+        if (user.id == User.UNDEFINED_ID) {
             user.id = autoIncrementId++
         }
         userList.add(user)
         updateList()
     }
+
     override suspend fun likeUser(
         currentUserId: String,
         userIdToLike: String
@@ -66,6 +110,7 @@ object DatingRepositoryImpl: DatingRepository {
             it.id == currentUserId
         } ?: throw java.lang.RuntimeException("Element with id $currentUserId not found")
     }
+
     override fun getUserList(): LiveData<List<User>> {
         return userListLiveData
     }
@@ -116,11 +161,13 @@ object DatingRepositoryImpl: DatingRepository {
     ): LiveData<List<User>> {
         TODO("Not yet implemented")
     }
+
     override fun deleteMatch(user: User) {
         userList.remove(user)
         updateList()
     }
-    private fun updateList(){
+
+    private fun updateList() {
         userListLiveData.value = userList.toList()
     }
 }

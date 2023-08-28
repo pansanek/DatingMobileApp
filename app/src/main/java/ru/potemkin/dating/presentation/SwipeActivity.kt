@@ -17,9 +17,18 @@ import ru.potemkin.dating.databinding.ItemUserBackLayoutBinding
 import ru.potemkin.dating.databinding.ItemUserLayoutBinding
 import ru.potemkin.dating.presentation.adapters.SwipeAdapter
 import ru.potemkin.dating.presentation.viewmodels.SwipeViewModel
+import ru.potemkin.dating.presentation.viewmodels.ViewModelFactory
+import javax.inject.Inject
 
 
 class SwipeActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as DatingApplication).component
+    }
 
     private lateinit var swipeViewModel: SwipeViewModel
 
@@ -37,6 +46,7 @@ class SwipeActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_swipe)
 
@@ -49,7 +59,7 @@ class SwipeActivity : AppCompatActivity() {
 
         swipeAdapter = SwipeAdapter()
 
-        swipeViewModel = ViewModelProvider(this)[SwipeViewModel::class.java]
+        swipeViewModel = ViewModelProvider(this,viewModelFactory)[SwipeViewModel::class.java]
         swipeViewModel.userList.observe(this) {
             with(binding.swipe) {
                 Log.d("SWIPE", it.toString())
