@@ -45,28 +45,28 @@ class MatchesActivity : AppCompatActivity() {
                         tvSwitchYes.setTextColor(
                             ContextCompat.getColor(
                                 applicationContext,
-                                R.color.teal_200
+                                R.color.md_theme_dark_background
                             )
                         )
                         matchesAdapter.changeType()
                         matchesAdapter.notifyDataSetChanged()
                         tvSwitchNo.setTextColor(
                             ContextCompat.getColor(
-                                applicationContext, R.color.white
+                                applicationContext, R.color.md_theme_dark_onBackground
                             )
                         )
                     }
                     else -> {
                         tvSwitchYes.setTextColor(
                             ContextCompat.getColor(
-                                applicationContext, R.color.white
+                                applicationContext, R.color.md_theme_dark_onBackground
                             )
                         )
                         matchesAdapter.changeType()
                         matchesAdapter.notifyDataSetChanged()
                         tvSwitchNo.setTextColor(
                             ContextCompat.getColor(
-                                applicationContext, R.color.teal_200
+                                applicationContext, R.color.md_theme_light_primaryContainer
                             )
                         )
                     }

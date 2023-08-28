@@ -26,7 +26,6 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:checked="true"
-            android:textColor="@color/white"
             android:thumb="@drawable/thumb_selector"
             app:switchMinWidth="140dp"
             app:track="@drawable/track_selector" />
@@ -45,7 +44,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Чаты"
-                android:textColor="#4282DC"
                 android:textSize="12sp" />
 
             <TextView
@@ -56,7 +54,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="Мэтчи"
-                android:textColor="@color/white"
+                android:textColor="@color/md_theme_light_onPrimary"
                 android:textSize="12sp" />
 
 
@@ -66,7 +64,6 @@
     </RelativeLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        style="@style/custom_bottom_nav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
@@ -76,7 +73,6 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.card.MaterialCardView
-            style="@style/custom_card_view_style"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

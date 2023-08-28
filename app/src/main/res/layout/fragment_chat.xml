@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/top_layout"
-        android:background="@color/black"
+        android:background="@color/md_theme_light_primaryContainer"
         android:layout_height="wrap_content">
 
         <androidx.cardview.widget.CardView
@@ -36,7 +36,6 @@
             android:text="Name"
             android:layout_marginVertical="16dp"
             android:gravity="center"
-            android:textColor="#FFF"
             android:textSize="24sp" />
 
     </RelativeLayout>
